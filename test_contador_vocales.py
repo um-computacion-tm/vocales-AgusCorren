@@ -1,9 +1,6 @@
 import unittest
 def contar_vocales(mi_string):
     mi_string = mi_string.lower()
-    for letra in mi_string:
-        if letra not in 'aeiou':
-            mi_string.replace(letra, "")
     vocales = ('a', 'e', 'i', 'o', 'u')
     resultado = {}
     for letra in mi_string:
@@ -40,6 +37,13 @@ class TestContadorVocales(unittest.TestCase):
         resultado = contar_vocales('mUrciElago')
         self.assertEqual(resultado, {'a': 1, 'e': 1, 'i': 1, 'o': 1, 'u': 1})
 
+    def test_contar_espacios0(self):
+        resultado = contar_vocales('Pues ayer funcionaba...')
+        self.assertEqual(resultado, {'a':3, 'e':2, 'i':1, 'o':1, 'u':2})
+
+    def test_contar_espacios1(self):
+        resultado = contar_vocales('Si se puede imaginar, se puede programar')
+        self.assertEqual(resultado, {'a':4, 'e':6, 'i':3, 'o':1, 'u':2})
 
 if __name__ == '__main__':
     unittest.main()
