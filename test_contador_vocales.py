@@ -1,6 +1,16 @@
 import unittest
+
+def tildes_f(lar):
+    tildes_dic = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u"}
+    for tilde in lar:
+        if tilde in 'áéíóú':
+            sin_tilde = tildes_dic[tilde]
+            lar = lar.replace(tilde, sin_tilde)
+    return lar
+
 def contar_vocales(mi_string):
     mi_string = mi_string.lower()
+    mi_string = tildes_f(mi_string)
     vocales = ('a', 'e', 'i', 'o', 'u')
     resultado = {}
     for letra in mi_string:
@@ -9,6 +19,7 @@ def contar_vocales(mi_string):
                 resultado[letra] = 0
             resultado[letra] += 1
     return resultado
+
 
 
 class TestContadorVocales(unittest.TestCase):
@@ -45,6 +56,15 @@ class TestContadorVocales(unittest.TestCase):
         resultado = contar_vocales('Si se puede imaginar, se puede programar')
         self.assertEqual(resultado, {'a':4, 'e':6, 'i':3, 'o':1, 'u':2})
 
+    def test_contar_tildes1(self):
+        resultado = contar_vocales('cÁsá n Óva')
+        self.assertEqual(resultado, {'a': 3, 'o': 1})
+
+    def test_contar_tildes2(self):
+        resultado = contar_vocales('m ú  rciÉ lagÓ')
+        self.assertEqual(resultado, {'a': 1, 'e': 1, 'i': 1, 'o': 1, 'u': 1})
+        
+
 if __name__ == '__main__':
     unittest.main()
 
@@ -54,7 +74,7 @@ activado = True
 while activado==True:
     palabra = input('Ingrese palabra: ')
     print(contar_vocales(palabra))
-
+    
     seguir = input('¿Desea continuar? Si/No: ')
     seguir.lower
     if seguir == "si":
