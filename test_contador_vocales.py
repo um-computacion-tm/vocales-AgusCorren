@@ -18,6 +18,8 @@ def contar_vocales(mi_string):
             if letra not in resultado:
                 resultado[letra] = 0
             resultado[letra] += 1
+    if resultado == {}:
+        return "NO CONTIENE VOCALES"
     return resultado
 
 
@@ -67,18 +69,3 @@ class TestContadorVocales(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
-'''
-activado = True
-while activado==True:
-    palabra = input('Ingrese palabra: ')
-    print(contar_vocales(palabra))
-    
-    seguir = input('¿Desea continuar? Si/No: ')
-    seguir.lower
-    if seguir == "si":
-        continue
-    else:
-        activado = False
-'''
